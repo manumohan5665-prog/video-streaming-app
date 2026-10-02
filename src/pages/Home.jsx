@@ -1,10 +1,10 @@
 function Home() {
-    return (
-        <div>
-            <h1>Home</h1>
-            <p>Welcome to Streamly.</p>
-        </div>
-    );
+  return (
+    <main>
+      <h1>Home</h1>
+      <p>Welcome to Streamly.</p>
+    </main>
+  );
 }
 
 export default Home;
