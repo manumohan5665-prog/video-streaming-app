@@ -1,8 +1,13 @@
 function Home() {
   return (
-    <main>
-      <h1>Home</h1>
-      <p>Welcome to Streamly.</p>
+    <main className="page-content">
+
+      <h1>Welcome to Streamly</h1>
+
+      <p>
+        Discover videos you'll love.
+      </p>
+
     </main>
   );
 }
