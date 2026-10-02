@@ -1,4 +1,6 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+
+import {BrowserRouter,Routes, Route} from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
@@ -12,29 +14,60 @@ import Playlists from "./pages/Playlists";
 import NotFound from "./pages/NotFound";
 
 function App() {
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <BrowserRouter>
 
-    <Navbar />
+      <Navbar
+        onMenuClick={() => setSidebarOpen(!sidebarOpen)}
+      />
 
-    <Sidebar />
+      <Sidebar
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
+
       <Routes>
 
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={<Home />}
+        />
 
-        <Route path="/explore" element={<Explore />} />
+        <Route
+          path="/explore"
+          element={<Explore />}
+        />
 
-        <Route path="/video/:id" element={<Video />} />
+        <Route
+          path="/video/:id"
+          element={<Video />}
+        />
 
-        <Route path="/watch-later" element={<WatchLater />} />
+        <Route
+          path="/watch-later"
+          element={<WatchLater />}
+        />
 
-        <Route path="/favourites" element={<Favourites />} />
+        <Route
+          path="/favourites"
+          element={<Favourites />}
+        />
 
-        <Route path="/playlists" element={<Playlists />} />
+        <Route
+          path="/playlists"
+          element={<Playlists />}
+        />
 
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="*"
+          element={<NotFound />}
+        />
 
       </Routes>
+
     </BrowserRouter>
   );
 }
