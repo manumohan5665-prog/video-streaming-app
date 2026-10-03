@@ -50,15 +50,93 @@ export function VideoProvider({ children }) {
         return watchLater.includes(Number(videoId));
     };
 
+    // -------------------------
+    // PLAYLISTS
+    // -------------------------
+
+    const [playlists, setPlaylists] = useLocalStorage(
+        "streamly-playlists",
+        []
+    );
+
+    const createPlaylist = (name, description = "") => {
+        const newPlaylist = {
+            id: Date.now(),
+            name,
+            description,
+            videoIds: [],
+            createdAt: new Date().toISOString(),
+        };
+
+        setPlaylists([...playlists, newPlaylist]);
+
+        return newPlaylist;
+    };
+
+    const deletePlaylist = (playlistId) => {
+        setPlaylists(
+            playlists.filter((playlist) => playlist.id !== playlistId)
+        );
+    };
+
+    const addToPlaylist = (playlistId, videoId) => {
+        const id = Number(videoId);
+
+        setPlaylists(
+            playlists.map((playlist) => {
+                if (playlist.id !== playlistId) {
+                    return playlist;
+                }
+
+                if (playlist.videoIds.includes(id)) {
+                    return playlist;
+                }
+
+                return {
+                    ...playlist,
+                    videoIds: [...playlist.videoIds, id],
+                };
+            })
+        );
+    };
+
+    const removeFromPlaylist = (playlistId, videoId) => {
+        const id = Number(videoId);
+
+        setPlaylists(
+            playlists.map((playlist) => {
+                if (playlist.id !== playlistId) {
+                    return playlist;
+                }
+
+                return {
+                    ...playlist,
+                    videoIds: playlist.videoIds.filter(
+                        (videoId) => videoId !== id
+                    ),
+                };
+            })
+        );
+    };
+
+
     return (
         <VideoContext.Provider
             value={{
                 favourites,
                 watchLater,
+
                 toggleFavourite,
                 toggleWatchLater,
+
                 isFavourite,
                 isWatchLater,
+
+                playlists,
+                createPlaylist,
+                deletePlaylist,
+                addToPlaylist,
+                removeFromPlaylist,
             }}
         >
             {children}

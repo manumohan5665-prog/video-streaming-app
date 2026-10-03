@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import {BrowserRouter,Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
@@ -12,6 +12,7 @@ import WatchLater from "./pages/WatchLater";
 import Favourites from "./pages/Favourites";
 import Playlists from "./pages/Playlists";
 import NotFound from "./pages/NotFound";
+import PlaylistDetails from "./pages/PlaylistDetails";
 
 function App() {
 
@@ -54,6 +55,11 @@ function App() {
         <Route
           path="/favourites"
           element={<Favourites />}
+        />
+
+        <Route
+          path="/playlists/:id"
+          element={<PlaylistDetails />}
         />
 
         <Route
