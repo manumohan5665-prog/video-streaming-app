@@ -1,108 +1,71 @@
-import {
-    createContext,
-    useContext,
-} from "react";
-
-import useLocalStorage
-    from "../hooks/useLocalStorage";
+import { createContext, useContext } from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const VideoContext = createContext();
 
-
 export function VideoProvider({ children }) {
-
-    const [
-        favorites,
-        setFavorites
-    ] = useLocalStorage(
-        "streamly-favorites",
+    const [favourites, setFavourites] = useLocalStorage(
+        "streamly-favourites",
         []
     );
 
-
-    const [
-        watchLater,
-        setWatchLater
-    ] = useLocalStorage(
+    const [watchLater, setWatchLater] = useLocalStorage(
         "streamly-watch-later",
         []
     );
 
+    // -------------------------
+    // FAVOURITES
+    // -------------------------
 
-    const toggleFavorite = (videoId) => {
+    const toggleFavourite = (videoId) => {
+        const id = Number(videoId);
 
-        if (favorites.includes(videoId)) {
-
-            setFavorites(
-                favorites.filter(
-                    (id) => id !== videoId
-                )
-            );
-
+        if (favourites.includes(id)) {
+            setFavourites(favourites.filter((item) => item !== id));
         } else {
-
-            setFavorites([
-                ...favorites,
-                videoId
-            ]);
-
+            setFavourites([...favourites, id]);
         }
-
     };
 
+    const isFavourite = (videoId) => {
+        return favourites.includes(Number(videoId));
+    };
+
+    // -------------------------
+    // WATCH LATER
+    // -------------------------
 
     const toggleWatchLater = (videoId) => {
+        const id = Number(videoId);
 
-        if (watchLater.includes(videoId)) {
-
-            setWatchLater(
-                watchLater.filter(
-                    (id) => id !== videoId
-                )
-            );
-
+        if (watchLater.includes(id)) {
+            setWatchLater(watchLater.filter((item) => item !== id));
         } else {
-
-            setWatchLater([
-                ...watchLater,
-                videoId
-            ]);
-
+            setWatchLater([...watchLater, id]);
         }
-
     };
 
-
-    const isFavorite = (videoId) =>
-        favorites.includes(videoId);
-
-
-    const isWatchLater = (videoId) =>
-        watchLater.includes(videoId);
-
+    const isWatchLater = (videoId) => {
+        return watchLater.includes(Number(videoId));
+    };
 
     return (
         <VideoContext.Provider
             value={{
-                favorites,
+                favourites,
                 watchLater,
-
-                toggleFavorite,
+                toggleFavourite,
                 toggleWatchLater,
-
-                isFavorite,
+                isFavourite,
                 isWatchLater,
             }}
         >
             {children}
         </VideoContext.Provider>
     );
-
 }
 
-
 export function useVideos() {
-
     return useContext(VideoContext);
-
 }

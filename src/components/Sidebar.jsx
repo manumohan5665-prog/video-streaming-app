@@ -1,6 +1,12 @@
 import { NavLink } from "react-router-dom";
+import { useVideos } from "../context/VideoContext";
 
 function Sidebar({ isOpen, onClose }) {
+    const {
+        favourites,
+        watchLater
+    } = useVideos();
+
     return (
         <>
             {isOpen && (
@@ -53,12 +59,18 @@ function Sidebar({ isOpen, onClose }) {
                     </h3>
 
                     <NavLink
-                        to="/favorites"
+                        to="/favourites"
                         className="sidebar-link"
                         onClick={onClose}
                     >
                         <span>❤️</span>
-                        <span>Favorites</span>
+                        <span>Favourites</span>
+
+                        {favourites.length > 0 && (
+                            <span className="sidebar-count">
+                                {favourites.length}
+                            </span>
+                        )}
                     </NavLink>
 
                     <NavLink
@@ -68,6 +80,12 @@ function Sidebar({ isOpen, onClose }) {
                     >
                         <span>🕒</span>
                         <span>Watch Later</span>
+
+                        {watchLater.length > 0 && (
+                            <span className="sidebar-count">
+                                {watchLater.length}
+                            </span>
+                        )}
                     </NavLink>
 
                     <NavLink

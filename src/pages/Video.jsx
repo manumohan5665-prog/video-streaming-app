@@ -6,8 +6,8 @@ import { useVideos } from "../context/VideoContext";
 
 function Video() {
     const {
-        isFavorite,
-        toggleFavorite,
+        isFavourite,
+        toggleFavourite,
         isWatchLater,
         toggleWatchLater,
     } = useVideos();
@@ -104,17 +104,17 @@ function Video() {
 
                         <button
                             className={
-                                isFavorite(video.id)
+                                isFavourite(video.id)
                                     ? "video-action-button active"
                                     : "video-action-button"
                             }
                             onClick={() =>
-                                toggleFavorite(video.id)
+                                toggleFavourite(video.id)
                             }
                         >
-                            {isFavorite(video.id)
-                                ? "❤️ Favorited"
-                                : "♡ Favorite"}
+                            {isFavourite(video.id)
+                                ? "❤️ Favourited"
+                                : "♡ Favourite"}
                         </button>
 
                         <button
