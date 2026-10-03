@@ -929,6 +929,14 @@ img {
     font-weight: 600;
 }
 
+.video-action-button.active {
+    background: #ff0033;
+
+    border-color: #ff0033;
+
+    color: white;
+}
+
 /* =========================
    MOBILE RESPONSIVE
 ========================= */

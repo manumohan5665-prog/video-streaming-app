@@ -2,8 +2,16 @@ import { useParams, Link } from "react-router-dom";
 
 import videos from "../data/videos";
 import VideoCard from "../components/VideoCard";
+import { useVideos } from "../context/VideoContext";
 
 function Video() {
+    const {
+        isFavorite,
+        toggleFavorite,
+        isWatchLater,
+        toggleWatchLater,
+    } = useVideos();
+
     const { id } = useParams();
 
     const video = videos.find(
@@ -94,12 +102,34 @@ function Video() {
                             👍 Like
                         </button>
 
-                        <button className="video-action-button">
-                            ❤️ Favorite
+                        <button
+                            className={
+                                isFavorite(video.id)
+                                    ? "video-action-button active"
+                                    : "video-action-button"
+                            }
+                            onClick={() =>
+                                toggleFavorite(video.id)
+                            }
+                        >
+                            {isFavorite(video.id)
+                                ? "❤️ Favorited"
+                                : "♡ Favorite"}
                         </button>
 
-                        <button className="video-action-button">
-                            🕒 Watch Later
+                        <button
+                            className={
+                                isWatchLater(video.id)
+                                    ? "video-action-button active"
+                                    : "video-action-button"
+                            }
+                            onClick={() =>
+                                toggleWatchLater(video.id)
+                            }
+                        >
+                            {isWatchLater(video.id)
+                                ? "✓ Saved"
+                                : "🕒 Watch Later"}
                         </button>
 
                         <button className="video-action-button">
