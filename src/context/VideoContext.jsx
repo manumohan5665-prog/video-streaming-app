@@ -4,19 +4,15 @@ import useLocalStorage from "../hooks/useLocalStorage";
 const VideoContext = createContext();
 
 export function VideoProvider({ children }) {
-    const [favourites, setFavourites] = useLocalStorage(
-        "streamly-favourites",
-        []
-    );
-
-    const [watchLater, setWatchLater] = useLocalStorage(
-        "streamly-watch-later",
-        []
-    );
 
     // -------------------------
     // FAVOURITES
     // -------------------------
+
+    const [favourites, setFavourites] = useLocalStorage(
+        "streamly-favourites",
+        []
+    );
 
     const toggleFavourite = (videoId) => {
         const id = Number(videoId);
@@ -35,6 +31,11 @@ export function VideoProvider({ children }) {
     // -------------------------
     // WATCH LATER
     // -------------------------
+
+    const [watchLater, setWatchLater] = useLocalStorage(
+        "streamly-watch-later",
+        []
+    );
 
     const toggleWatchLater = (videoId) => {
         const id = Number(videoId);
@@ -119,24 +120,51 @@ export function VideoProvider({ children }) {
         );
     };
 
+    // -------------------------
+    // LIKED VIDEOS
+    // -------------------------
+
+    const [likedVideos, setLikedVideos] = useLocalStorage(
+        "streamly-liked-videos",
+        []
+    );
+
+    const toggleLike = (videoId) => {
+        const id = Number(videoId);
+
+        if (likedVideos.includes(id)) {
+            setLikedVideos(
+                likedVideos.filter((item) => item !== id)
+            );
+        } else {
+            setLikedVideos([...likedVideos, id]);
+        }
+    };
+
+    const isLiked = (videoId) => {
+        return likedVideos.includes(Number(videoId));
+    };
 
     return (
         <VideoContext.Provider
             value={{
                 favourites,
                 watchLater,
+                playlists,
+                likedVideos,
 
                 toggleFavourite,
                 toggleWatchLater,
-
                 isFavourite,
                 isWatchLater,
 
-                playlists,
                 createPlaylist,
                 deletePlaylist,
                 addToPlaylist,
                 removeFromPlaylist,
+
+                toggleLike,
+                isLiked,
             }}
         >
             {children}

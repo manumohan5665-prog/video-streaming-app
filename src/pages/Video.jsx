@@ -30,6 +30,8 @@ function Video() {
         playlists,
         addToPlaylist,
         removeFromPlaylist,
+        toggleLike,
+        isLiked,
     } = useVideos();
 
     const currentPlaylist = playlists.find(
@@ -60,6 +62,31 @@ function Video() {
             currentIndex < playlistVideos.length - 1
             ? playlistVideos[currentIndex + 1]
             : null;
+
+    const handleShare = async () => {
+        const shareUrl = window.location.href;
+
+        try {
+            if (navigator.share) {
+                await navigator.share({
+                    title: video.title,
+                    text: `Watch "${video.title}" on Streamly`,
+                    url: shareUrl,
+                });
+            } else {
+                await navigator.clipboard.writeText(shareUrl);
+
+                alert("Video link copied to clipboard!");
+            }
+        } catch (error) {
+            if (error.name !== "AbortError") {
+                console.error("Share failed:", error);
+            }
+        }
+    };
+
+    const [playerLoading, setPlayerLoading] = useState(true);
+    const [playerError, setPlayerError] = useState(false);
 
     if (!video) {
         return (
@@ -92,10 +119,8 @@ function Video() {
         );
     }
 
-    const relatedVideos = videos.filter(
-        (item) =>
-            item.category === video.category &&
-            item.id !== video.id
+    const recommendedVideos = videos.filter(
+        (item) => item.id !== video.id
     );
 
     const [showPlaylistMenu, setShowPlaylistMenu] = useState(false);
@@ -154,12 +179,47 @@ function Video() {
 
             <section className="video-player-container">
 
-                <iframe
-                    src={video.videoUrl}
-                    title={video.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                />
+                {playerLoading && !playerError && (
+                    <div className="player-loading">
+                        <div className="player-spinner"></div>
+                        <p>Loading video...</p>
+                    </div>
+                )}
+
+                {playerError ? (
+                    <div className="player-error">
+                        <div className="player-error-icon">⚠️</div>
+
+                        <h3>Unable to load video</h3>
+
+                        <p>
+                            Something went wrong while loading this video.
+                        </p>
+
+                        <button
+                            type="button"
+                            className="player-retry-button"
+                            onClick={() => {
+                                setPlayerError(false);
+                                setPlayerLoading(true);
+                            }}
+                        >
+                            Try Again
+                        </button>
+                    </div>
+                ) : (
+                    <iframe
+                        src={video.videoUrl}
+                        title={video.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        onLoad={() => setPlayerLoading(false)}
+                        onError={() => {
+                            setPlayerLoading(false);
+                            setPlayerError(true);
+                        }}
+                    />
+                )}
 
             </section>
 
@@ -189,6 +249,18 @@ function Video() {
 
 
                     <div className="video-actions">
+
+                        <button
+                            type="button"
+                            className={
+                                isLiked(video.id)
+                                    ? "video-action-button active"
+                                    : "video-action-button"
+                            }
+                            onClick={() => toggleLike(video.id)}
+                        >
+                            {isLiked(video.id) ? "❤️ Liked" : "♡ Like"}
+                        </button>
 
                         <button
                             className={
@@ -281,7 +353,11 @@ function Video() {
                             )}
                         </div>
 
-                        <button className="video-action-button">
+                        <button
+                            type="button"
+                            className="video-action-button"
+                            onClick={handleShare}
+                        >
                             ↗ Share
                         </button>
 
@@ -303,42 +379,21 @@ function Video() {
             </section>
 
 
-            {/* Related Videos */}
+            {/* Recommended Videos */}
 
-            {relatedVideos.length > 0 && (
+            {recommendedVideos.length > 0 && (
 
-                <section className="video-section">
-
-                    <div className="section-header">
-
-                        <div>
-
-                            <p className="section-label">
-                                KEEP WATCHING
-                            </p>
-
-                            <h2>
-                                Related Videos
-                            </h2>
-
-                        </div>
-
-                    </div>
-
+                <section className="related-videos-section">
+                    <h2>Recommended for You</h2>
 
                     <div className="video-grid">
-
-                        {relatedVideos.map((relatedVideo) => (
-
+                        {recommendedVideos.map((item) => (
                             <VideoCard
-                                key={relatedVideo.id}
-                                video={relatedVideo}
+                                key={item.id}
+                                video={item}
                             />
-
                         ))}
-
                     </div>
-
                 </section>
 
             )}
