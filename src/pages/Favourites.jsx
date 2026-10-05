@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import videos from "../data/videos";
 import VideoCard from "../components/VideoCard";
 import { useVideos } from "../context/VideoContext";
+import EmptyState from "../components/EmptyState";
 
 function Favourites() {
   const { favourites } = useVideos();
 
   const favouriteVideos = videos.filter((video) =>
-  favourites.includes(Number(video.id))
-);
+    favourites.includes(Number(video.id))
+  );
 
   return (
     <main className="page-content">
@@ -46,28 +47,13 @@ function Favourites() {
 
       ) : (
 
-        <div className="empty-state">
-
-          <div className="empty-icon">
-            ❤️
-          </div>
-
-          <h3>
-            No favourites yet
-          </h3>
-
-          <p>
-            Videos you favourite will appear here.
-          </p>
-
-          <Link
-            to="/explore"
-            className="back-button"
-          >
-            Explore Videos
-          </Link>
-
-        </div>
+        <EmptyState
+          icon="❤️"
+          title="No favorites yet"
+          message="Videos you favorite will appear here."
+          buttonText="Explore Videos"
+          buttonTo="/explore"
+        />
 
       )}
 

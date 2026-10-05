@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useVideos } from "../context/VideoContext";
+import EmptyState from "../components/EmptyState";
 
 function Playlists() {
     const {
@@ -124,16 +125,11 @@ function Playlists() {
                         ))}
                     </div>
                 ) : (
-                    <div className="empty-state">
-                        <div className="empty-icon">📁</div>
-
-                        <h3>No playlists yet</h3>
-
-                        <p>
-                            Create your first playlist to organize
-                            your videos.
-                        </p>
-                    </div>
+                    <EmptyState
+                        icon="📁"
+                        title="No playlists yet"
+                        message="Create your first playlist to organize your videos."
+                    />
                 )}
             </section>
         </main>

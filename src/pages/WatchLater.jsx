@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import videos from "../data/videos";
 import VideoCard from "../components/VideoCard";
 import { useVideos } from "../context/VideoContext";
+import EmptyState from "../components/EmptyState";
 
 function WatchLater() {
     const { watchLater } = useVideos();
@@ -46,28 +47,13 @@ function WatchLater() {
 
             ) : (
 
-                <div className="empty-state">
-
-                    <div className="empty-icon">
-                        🕒
-                    </div>
-
-                    <h3>
-                        Your watch later list is empty
-                    </h3>
-
-                    <p>
-                        Save videos and come back to them later.
-                    </p>
-
-                    <Link
-                        to="/explore"
-                        className="back-button"
-                    >
-                        Find Videos
-                    </Link>
-
-                </div>
+                <EmptyState
+                    icon="🕒"
+                    title="Nothing saved yet"
+                    message="Videos you save for later will appear here."
+                    buttonText="Find Videos"
+                    buttonTo="/explore"
+                />
 
             )}
 

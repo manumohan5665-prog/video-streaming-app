@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import videos from "../data/videos";
 import VideoCard from "../components/VideoCard";
 import { useVideos } from "../context/VideoContext";
+import EmptyState from "../components/EmptyState";
 
 function PlaylistDetails() {
     const { id } = useParams();
@@ -113,23 +114,14 @@ function PlaylistDetails() {
                     ))}
                 </div>
             ) : (
-                <div className="empty-state">
-                    <div className="empty-icon">🎬</div>
+                <EmptyState
+                    icon="🎬"
+                    title="No videos in this playlist"
+                    message="Add videos to this playlist from a video page."
+                    buttonText="Explore Videos"
+                    buttonTo="/explore"
+                />
 
-                    <h3>No videos in this playlist</h3>
-
-                    <p>
-                        Add videos to this playlist from a
-                        video page.
-                    </p>
-
-                    <Link
-                        to="/explore"
-                        className="back-button"
-                    >
-                        Explore Videos
-                    </Link>
-                </div>
             )}
         </main>
     );

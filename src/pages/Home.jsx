@@ -1,6 +1,8 @@
 import { useState } from "react";
 import videos from "../data/videos";
 import VideoCard from "../components/VideoCard";
+import { Link } from "react-router-dom";
+import VideoCardSkeleton from "../components/VideoCardSkeleton";
 
 function Home() {
     const [selectedCategory, setSelectedCategory] = useState("All");
@@ -41,36 +43,38 @@ function Home() {
           HERO
       ========================= */}
 
-            <section className="hero-section">
+            <section
+                className="home-hero"
+                style={{
+                    backgroundImage: `url(${featuredVideo.thumbnail})`,
+                }}
+            >
+                <div className="home-hero-overlay"></div>
 
-                <img
-                    src={featuredVideo.thumbnail}
-                    alt={featuredVideo.title}
-                    className="hero-background"
-                />
-
-                <div className="hero-overlay"></div>
-
-                <div className="hero-content">
-
-                    <p className="hero-label">
+                <div className="home-hero-content">
+                    <span className="home-hero-label">
                         FEATURED VIDEO
-                    </p>
+                    </span>
 
-                    <h1>
-                        {featuredVideo.title}
-                    </h1>
+                    <h1>{featuredVideo.title}</h1>
 
-                    <p className="hero-description">
-                        {featuredVideo.description}
-                    </p>
+                    <p>{featuredVideo.description}</p>
 
-                    <button className="hero-button">
-                        Watch Now
-                    </button>
+                    <div className="home-hero-meta">
+                        <span>{featuredVideo.category}</span>
+                        <span>•</span>
+                        <span>{featuredVideo.views} views</span>
+                        <span>•</span>
+                        <span>{featuredVideo.duration}</span>
+                    </div>
 
+                    <Link
+                        to={`/video/${featuredVideo.id}`}
+                        className="home-hero-button"
+                    >
+                        ▶ Watch Now
+                    </Link>
                 </div>
-
             </section>
 
 
@@ -189,20 +193,14 @@ function Home() {
       ========================= */}
 
             {selectedCategory === "All" && (
-                <section className="video-section">
 
-                    <div className="section-header">
+                <section className="home-section">
+                    <div className="home-section-header">
+                        <h2>Trending Now</h2>
 
-                        <div>
-                            <p className="section-label">
-                                WHAT'S HOT
-                            </p>
-
-                            <h2>
-                                Trending Now
-                            </h2>
-                        </div>
-
+                        <Link to="/explore">
+                            See All →
+                        </Link>
                     </div>
 
                     <div className="video-grid">
@@ -215,32 +213,22 @@ function Home() {
                         ))}
 
                     </div>
-
                 </section>
+
             )}
 
             {/* =========================
           RECOMMENDED
       ========================= */}
 
-            <section className="video-section">
+            <section className="home-section">
+                <div className="home-section-header">
+                    <h2>Recommended</h2>
 
-                <div className="section-header">
-
-                    <div>
-
-                        <p className="section-label">
-                            FOR YOU
-                        </p>
-
-                        <h2>
-                            Recommended
-                        </h2>
-
-                    </div>
-
+                    <Link to="/explore">
+                        See All →
+                    </Link>
                 </div>
-
 
                 <div className="video-grid">
 
@@ -254,7 +242,6 @@ function Home() {
                     ))}
 
                 </div>
-
             </section>
 
         </main>
