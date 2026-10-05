@@ -146,7 +146,7 @@ export function VideoProvider({ children }) {
     };
 
     // -------------------------
-    // RECENTLY WATCHED
+    // RECENT WATCH HISTORY
     // -------------------------
     const [recentlyWatched, setRecentlyWatched] = useLocalStorage(
         "streamly-recently-watched",
@@ -162,6 +162,13 @@ export function VideoProvider({ children }) {
         ].slice(0, 6);
 
         setRecentlyWatched(updated);
+    };
+
+    // -------------------------
+    // CLEAR WATCH HISTORY
+    // -------------------------
+    const clearRecentlyWatched = () => {
+        setRecentlyWatched([]);
     };
 
     return (
@@ -187,6 +194,7 @@ export function VideoProvider({ children }) {
 
                 recentlyWatched,
                 addToRecentlyWatched,
+                clearRecentlyWatched,
             }}
         >
             {children}

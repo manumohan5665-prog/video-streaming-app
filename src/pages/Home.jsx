@@ -8,8 +8,9 @@ function Home() {
     const [selectedCategory, setSelectedCategory] = useState("All");
 
     const {
-    recentlyWatched,
-} = useVideos();
+        recentlyWatched,
+        clearRecentlyWatched,
+    } = useVideos();
 
     const recentlyWatchedVideos = recentlyWatched
         .map((id) =>
@@ -208,13 +209,28 @@ function Home() {
                 <section className="home-section">
                     <div className="home-section-header">
                         <div>
-                            <span className="section-label">YOUR HISTORY</span>
-                            <h2>Continue Watching</h2>
+                            <span className="section-label">
+                                YOUR HISTORY
+                            </span>
+
+                            <h2>
+                                Continue Watching
+                            </h2>
                         </div>
 
-                        <span className="section-count">
-                            {recentlyWatchedVideos.length} videos
-                        </span>
+                        <div className="section-header-actions">
+                            <span className="section-count">
+                                {recentlyWatchedVideos.length} videos
+                            </span>
+
+                            <button
+                                type="button"
+                                className="clear-history-button"
+                                onClick={clearRecentlyWatched}
+                            >
+                                Clear
+                            </button>
+                        </div>
                     </div>
 
                     <div className="video-grid">
