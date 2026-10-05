@@ -18,6 +18,10 @@ function VideoCard({ video }) {
                     {video.duration}
                 </span>
 
+                <span className="thumbnail-play">
+                    ▶
+                </span>
+
             </Link>
 
 

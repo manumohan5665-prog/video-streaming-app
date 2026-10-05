@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     Link,
     useParams,
@@ -22,6 +22,12 @@ function Video() {
         (video) => video.id === Number(id)
     );
 
+    useEffect(() => {
+        if (video) {
+            addToRecentlyWatched(video.id);
+        }
+    }, [video]);
+
     const {
         toggleFavourite,
         toggleWatchLater,
@@ -32,6 +38,7 @@ function Video() {
         removeFromPlaylist,
         toggleLike,
         isLiked,
+        addToRecentlyWatched,
     } = useVideos();
 
     const currentPlaylist = playlists.find(

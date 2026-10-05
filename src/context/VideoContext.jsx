@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 const VideoContext = createContext();
@@ -145,6 +145,25 @@ export function VideoProvider({ children }) {
         return likedVideos.includes(Number(videoId));
     };
 
+    // -------------------------
+    // RECENTLY WATCHED
+    // -------------------------
+    const [recentlyWatched, setRecentlyWatched] = useLocalStorage(
+        "streamly-recently-watched",
+        []
+    );
+
+    const addToRecentlyWatched = (videoId) => {
+        const id = Number(videoId);
+
+        const updated = [
+            id,
+            ...recentlyWatched.filter((item) => item !== id),
+        ].slice(0, 6);
+
+        setRecentlyWatched(updated);
+    };
+
     return (
         <VideoContext.Provider
             value={{
@@ -165,6 +184,9 @@ export function VideoProvider({ children }) {
 
                 toggleLike,
                 isLiked,
+
+                recentlyWatched,
+                addToRecentlyWatched,
             }}
         >
             {children}
@@ -172,6 +194,6 @@ export function VideoProvider({ children }) {
     );
 }
 
-export function useVideos() {
+export const useVideos = () => {
     return useContext(VideoContext);
-}
+};

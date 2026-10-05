@@ -1,11 +1,23 @@
 import { useState } from "react";
-import videos from "../data/videos";
-import VideoCard from "../components/VideoCard";
 import { Link } from "react-router-dom";
-import VideoCardSkeleton from "../components/VideoCardSkeleton";
+import VideoCard from "../components/VideoCard";
+import { useVideos } from "../context/VideoContext";
+import videos from "../data/videos";
 
 function Home() {
     const [selectedCategory, setSelectedCategory] = useState("All");
+
+    const {
+    recentlyWatched,
+} = useVideos();
+
+    const recentlyWatchedVideos = recentlyWatched
+        .map((id) =>
+            videos.find(
+                (video) => Number(video.id) === Number(id)
+            )
+        )
+        .filter(Boolean);
 
     const categories = [
         "All",
@@ -35,6 +47,19 @@ function Home() {
     const featuredVideo = videos.find(
         (video) => video.featured
     );
+
+    const handleCategoryChange = (category) => {
+        setSelectedCategory(category);
+
+        setTimeout(() => {
+            document
+                .querySelector(".home-section")
+                ?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
+        }, 50);
+    };
 
     return (
         <main className="page-content">
@@ -100,25 +125,16 @@ function Home() {
 
 
                 <div className="category-list">
-
                     {categories.map((category) => (
-
                         <button
                             key={category}
-                            className={
-                                selectedCategory === category
-                                    ? "category-button active"
-                                    : "category-button"
-                            }
-                            onClick={() =>
-                                setSelectedCategory(category)
-                            }
+                            className={`category-button ${selectedCategory === category ? "active" : ""
+                                }`}
+                            onClick={() => handleCategoryChange(category)}
                         >
                             {category}
                         </button>
-
                     ))}
-
                 </div>
 
             </section>
@@ -186,6 +202,30 @@ function Home() {
 
                 </section>
 
+            )}
+
+            {recentlyWatchedVideos.length > 0 && (
+                <section className="home-section">
+                    <div className="home-section-header">
+                        <div>
+                            <span className="section-label">YOUR HISTORY</span>
+                            <h2>Continue Watching</h2>
+                        </div>
+
+                        <span className="section-count">
+                            {recentlyWatchedVideos.length} videos
+                        </span>
+                    </div>
+
+                    <div className="video-grid">
+                        {recentlyWatchedVideos.map((video) => (
+                            <VideoCard
+                                key={video.id}
+                                video={video}
+                            />
+                        ))}
+                    </div>
+                </section>
             )}
 
             {/* =========================
