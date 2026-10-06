@@ -6,6 +6,7 @@ import "./index.css";
 import App from "./App.jsx";
 
 import { VideoProvider } from "./context/VideoContext.jsx";
+import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
 
 createRoot(
@@ -14,11 +15,11 @@ createRoot(
 
   <StrictMode>
 
-    <VideoProvider>
-
-      <App />
-
-    </VideoProvider>
+    <ErrorBoundary>
+      <VideoProvider>
+        <App />
+      </VideoProvider>
+    </ErrorBoundary>
 
   </StrictMode>
 

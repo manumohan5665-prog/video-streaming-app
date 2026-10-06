@@ -2089,6 +2089,74 @@ img {
     background: var(--primary-hover);
 }
 
+.error-boundary {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    background: var(--bg-primary);
+}
+
+.error-boundary-content {
+    width: 100%;
+    max-width: 450px;
+
+    padding: 40px 30px;
+
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-lg);
+
+    background: var(--bg-secondary);
+
+    text-align: center;
+    box-shadow: var(--shadow-md);
+}
+
+.error-boundary-icon {
+    margin-bottom: 15px;
+    font-size: 45px;
+}
+
+.error-boundary-content h1 {
+    margin-bottom: 10px;
+
+    color: white;
+    font-size: 24px;
+}
+
+.error-boundary-content p {
+    margin-bottom: 25px;
+
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.error-boundary-button {
+    padding: 11px 20px;
+
+    border: none;
+    border-radius: var(--radius-sm);
+
+    background: var(--primary);
+    color: white;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.error-boundary-button:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
 
 /* =========================
    MOBILE RESPONSIVE

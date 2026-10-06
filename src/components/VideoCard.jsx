@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { memo } from "react";
 
 function VideoCard({ video }) {
+    const handleImageError = (e) => {
+        e.currentTarget.src =
+            "https://placehold.co/640x360/181818/ffffff?text=Streamly";
+    };
     return (
         <article className="video-card">
 
@@ -12,6 +17,9 @@ function VideoCard({ video }) {
                     src={video.thumbnail}
                     alt={video.title}
                     className="video-thumbnail"
+                    loading="lazy"
+                    decoding="async"
+                    onError={handleImageError}
                 />
 
                 <span className="video-duration">
@@ -58,4 +66,4 @@ function VideoCard({ video }) {
     );
 }
 
-export default VideoCard;
+export default memo(VideoCard);
