@@ -148,14 +148,24 @@ function Home() {
 
                         <div className="category-list">
                             {categories.map((category) => (
-                                <button
-                                    key={category}
-                                    className={`category-button ${selectedCategory === category ? "active" : ""
-                                        }`}
-                                    onClick={() => handleCategoryChange(category)}
-                                >
-                                    {category}
-                                </button>
+                                category === "All" ? (
+                                    <button
+                                        key={category}
+                                        className={`category-button ${selectedCategory === category ? "active" : ""
+                                            }`}
+                                        onClick={() => handleCategoryChange(category)}
+                                    >
+                                        {category}
+                                    </button>
+                                ) : (
+                                    <Link
+                                        key={category}
+                                        to={`/category/${category.toLowerCase()}`}
+                                        className="category-button"
+                                    >
+                                        {category}
+                                    </Link>
+                                )
                             ))}
                         </div>
 

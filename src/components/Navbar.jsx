@@ -39,7 +39,7 @@ function Navbar({ onMenuClick }) {
         <span className="logo-icon">▶</span>
 
         <span className="logo-text">
-          Streamly
+          UTube
         </span>
       </div>
 

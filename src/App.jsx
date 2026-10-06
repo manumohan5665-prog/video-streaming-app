@@ -7,12 +7,14 @@ import Sidebar from "./components/Sidebar";
 
 import Home from "./pages/Home";
 import Explore from "./pages/Explore";
+import Trending from "./pages/Trending";
 import Video from "./pages/Video";
 import WatchLater from "./pages/WatchLater";
 import Favourites from "./pages/Favourites";
 import Playlists from "./pages/Playlists";
 import NotFound from "./pages/NotFound";
 import PlaylistDetails from "./pages/PlaylistDetails";
+import Category from "./pages/Category";
 
 function App() {
 
@@ -43,6 +45,10 @@ function App() {
         />
 
         <Route
+          path="/trending"
+          element={<Trending />} />
+
+        <Route
           path="/video/:id"
           element={<Video />}
         />
@@ -65,6 +71,11 @@ function App() {
         <Route
           path="/playlists"
           element={<Playlists />}
+        />
+
+        <Route
+          path="/category/:category"
+          element={<Category />}
         />
 
         <Route

@@ -108,38 +108,57 @@ function Sidebar({ isOpen, onClose }) {
 
                     <NavLink
                         to="/category/education"
-                        className="sidebar-link"
+                        className={({ isActive }) =>
+                            isActive ? "sidebar-link active" : "sidebar-link"
+                        }
                         onClick={onClose}
                     >
-                        <span>🎓</span>
+                        <span className="sidebar-icon">🎓</span>
                         <span>Education</span>
                     </NavLink>
 
                     <NavLink
                         to="/category/music"
-                        className="sidebar-link"
+                        className={({ isActive }) =>
+                            isActive ? "sidebar-link active" : "sidebar-link"
+                        }
                         onClick={onClose}
                     >
-                        <span>🎵</span>
+                        <span className="sidebar-icon">🎵</span>
                         <span>Music</span>
                     </NavLink>
 
                     <NavLink
                         to="/category/comedy"
-                        className="sidebar-link"
+                        className={({ isActive }) =>
+                            isActive ? "sidebar-link active" : "sidebar-link"
+                        }
                         onClick={onClose}
                     >
-                        <span>😂</span>
+                        <span className="sidebar-icon">😂</span>
                         <span>Comedy</span>
                     </NavLink>
 
                     <NavLink
                         to="/category/sports"
-                        className="sidebar-link"
+                        className={({ isActive }) =>
+                            isActive ? "sidebar-link active" : "sidebar-link"
+                        }
                         onClick={onClose}
                     >
-                        <span>⚽</span>
+                        <span className="sidebar-icon">⚽</span>
                         <span>Sports</span>
+                    </NavLink>
+
+                    <NavLink
+                        to="/category/travel"
+                        className={({ isActive }) =>
+                            isActive ? "sidebar-link active" : "sidebar-link"
+                        }
+                        onClick={onClose}
+                    >
+                        <span className="sidebar-icon">✈️</span>
+                        <span>Travel</span>
                     </NavLink>
 
                 </div>
