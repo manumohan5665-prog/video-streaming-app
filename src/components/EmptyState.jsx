@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import { Mailbox } from 'lucide-react';
 
 function EmptyState({
-    icon = "📭",
+    icon = <Mailbox size={20} strokeWidth={2} />,
     title = "Nothing here yet",
     message = "There's nothing to show right now.",
     buttonText,

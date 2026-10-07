@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import VideoCard from "../components/VideoCard";
 import videos from "../data/videos";
+import { Flame, Play } from "lucide-react";
 
 function Trending() {
     const trendingVideos = videos.filter(
@@ -15,7 +15,7 @@ function Trending() {
                     WHAT'S HOT
                 </p>
 
-                <h1>Trending</h1>
+                <h1><Flame size={25}  strokeWidth={2} />Trending</h1>
 
                 <p>
                     Discover the videos everyone is watching right now.
@@ -68,7 +68,7 @@ function Trending() {
                                     </span>
 
                                     <span className="trending-play">
-                                        ▶
+                                        <Play size={18} fill="currentColor" strokeWidth={0} />
                                     </span>
                                 </Link>
 
@@ -98,7 +98,7 @@ function Trending() {
                 ) : (
                     <div className="empty-state">
                         <div className="empty-icon">
-                            🔥
+                            <Flame size={18} fill="currentColor" strokeWidth={2} />
                         </div>
 
                         <h3>

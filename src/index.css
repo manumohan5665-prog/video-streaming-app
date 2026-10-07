@@ -181,8 +181,8 @@ img {
 
 .notification-badge {
     position: absolute;
-    top: -2px;
-    right: -2px;
+    top: -12px;
+    right: -4px;
 
     min-width: 16px;
     height: 16px;
@@ -333,6 +333,7 @@ img {
     color: white;
 
     font-size: 20px;
+    margin-top: 8px;
 }
 
 /* =========================
@@ -445,6 +446,10 @@ img {
 }
 
 .profile-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
     width: 100%;
 
     padding: 10px 12px;
@@ -463,6 +468,11 @@ img {
     transition:
         background 0.2s ease,
         color 0.2s ease;
+}
+
+.profile-menu-item svg {
+    flex-shrink: 0;
+    display: block;
 }
 
 .profile-menu-item:hover {
@@ -555,6 +565,19 @@ img {
     font-size: 17px;
 }
 
+.sidebar-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.sidebar-icon svg {
+    display: block;
+}
+
 .page-content {
     margin-left: var(--sidebar-width);
     width: calc(100% - var(--sidebar-width));
@@ -629,36 +652,28 @@ img {
 
 .thumbnail-play {
     position: absolute;
-
     top: 50%;
     left: 50%;
-
     width: 48px;
     height: 48px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     transform: translate(-50%, -45%) scale(0.7);
-
     border-radius: 50%;
-
     background: rgba(255, 0, 51, 0.95);
-    color: white;
-
-    font-size: 17px;
-
+    color: #fff;
     opacity: 0;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
 
-    transition:
-        opacity 0.25s ease,
-        transform 0.25s ease;
+.thumbnail-play svg {
+    display: block;
+    margin-left: 2px;
 }
 
 .thumbnail-wrapper:hover .thumbnail-play {
     opacity: 1;
-
     transform: translate(-50%, -50%) scale(1);
 }
 
@@ -1028,6 +1043,7 @@ img {
 .category-back-button {
     display: inline-flex;
     align-items: center;
+    gap: 7px;
 
     margin-top: 14px;
 
@@ -1591,6 +1607,14 @@ img {
 }
 
 .video-action-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
     padding: 9px 14px;
 
     border: 1px solid #303030;
@@ -1608,6 +1632,11 @@ img {
     background: #292929;
 
     color: white;
+}
+
+.video-action-button svg {
+    flex-shrink: 0;
+    display: block;
 }
 
 .video-description {

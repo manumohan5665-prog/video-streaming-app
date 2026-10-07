@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { memo } from "react";
+import { Play } from "lucide-react";
 
 function VideoCard({ video }) {
     const handleImageError = (e) => {
@@ -26,8 +27,8 @@ function VideoCard({ video }) {
                     {video.duration}
                 </span>
 
-                <span className="thumbnail-play">
-                    ▶
+                <span className="thumbnail-play" aria-hidden="true">
+                    <Play size={18} fill="currentColor" strokeWidth={0} />
                 </span>
 
             </Link>

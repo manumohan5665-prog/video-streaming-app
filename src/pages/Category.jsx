@@ -1,36 +1,45 @@
 import { Link, useParams } from "react-router-dom";
 import VideoCard from "../components/VideoCard";
 import videos from "../data/videos";
+import {
+    GraduationCap,
+    Music,
+    Laugh,
+    Trophy,
+    Plane,
+    Folder,
+    ArrowLeft,
+} from "lucide-react";
 
 const categoryInfo = {
     education: {
         name: "Education",
-        icon: "🎓",
+        icon: GraduationCap,
         description: "Learn something new with tutorials, courses, and educational videos.",
     },
 
     music: {
         name: "Music",
-        icon: "🎵",
-        description: "Listen to music, performances, and relaxing sounds.",
+        icon: Music,
+        description: "Discover music, performances, playlists, and relaxing sounds.",
     },
 
     comedy: {
         name: "Comedy",
-        icon: "😂",
-        description: "Laugh out loud with comedy clips and funny moments.",
+        icon: Laugh,
+        description: "Enjoy funny moments, stand-up comedy, and entertainment.",
     },
 
     sports: {
         name: "Sports",
-        icon: "⚽",
-        description: "Watch highlights, skills, and the latest sports moments.",
+        icon: Trophy,
+        description: "Watch highlights, skills, matches, and unforgettable sports moments.",
     },
 
     travel: {
         name: "Travel",
-        icon: "✈️",
-        description: "Explore beautiful destinations and travel experiences.",
+        icon: Plane,
+        description: "Explore beautiful destinations, adventures, and travel experiences.",
     },
 };
 
@@ -50,7 +59,7 @@ function Category() {
         return (
             <main className="page-content">
                 <div className="empty-state">
-                    <div className="empty-icon">📂</div>
+                    <div className="empty-icon"><Folder size={20} strokeWidth={2} /></div>
 
                     <h3>Category not found</h3>
 
@@ -77,7 +86,7 @@ function Category() {
             <section className="category-page-hero">
 
                 <div className="category-page-icon">
-                    {currentCategory.icon}
+                    <currentCategory.icon size={34} strokeWidth={1.8} />
                 </div>
 
                 <div>
@@ -93,11 +102,9 @@ function Category() {
                         {currentCategory.description}
                     </p>
 
-                    <Link
-                        to="/explore"
-                        className="category-back-button"
-                    >
-                        ← Explore all videos
+                    <Link to="/explore" className="category-back-button">
+                        <ArrowLeft size={16} />
+                        <span>Explore all videos</span>
                     </Link>
                 </div>
 

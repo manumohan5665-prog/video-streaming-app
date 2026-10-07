@@ -4,6 +4,7 @@ import VideoCard from "../components/VideoCard";
 import { useVideos } from "../context/VideoContext";
 import videos from "../data/videos";
 import VideoCardSkeleton from "../components/VideoCardSkeleton";
+import { Clapperboard, Play } from "lucide-react";
 
 function Home() {
     const [selectedCategory, setSelectedCategory] = useState("All");
@@ -119,7 +120,7 @@ function Home() {
                                 to={`/video/${featuredVideo.id}`}
                                 className="home-hero-button"
                             >
-                                ▶ Watch Now
+                                <Play size={20} strokeWidth={2} /> Watch Now
                             </Link>
                         </div>
                     </section>
@@ -217,7 +218,7 @@ function Home() {
                                 <div className="empty-state">
 
                                     <div className="empty-icon">
-                                        🎬
+                                        <Clapperboard size={20} strokeWidth={2}/>
                                     </div>
 
                                     <h3>

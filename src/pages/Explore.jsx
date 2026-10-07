@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import videos from "../data/videos";
 import VideoCard from "../components/VideoCard";
+import { Search } from 'lucide-react';
+
 
 function Explore() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -132,7 +134,7 @@ function Explore() {
                 />
 
                 <button>
-                    🔍
+                    <Search size={20} strokeWidth={2} />
                 </button>
 
             </div>
@@ -258,7 +260,7 @@ function Explore() {
                 <div className="empty-state">
 
                     <div className="empty-icon">
-                        🔎
+                        <Search size={20} strokeWidth={2} />
                     </div>
 
                     <h3>

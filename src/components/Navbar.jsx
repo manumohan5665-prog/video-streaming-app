@@ -1,5 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  Menu,
+  Play,
+  Search,
+  Bell,
+  User,
+  Flame,
+  Music,
+  Star,
+  Settings,
+  LogOut,
+} from "lucide-react";
 
 function Navbar({ onMenuClick }) {
   const [profileOpen, setProfileOpen] = useState(false);
@@ -28,18 +40,19 @@ function Navbar({ onMenuClick }) {
       <button
         className="menu-button"
         onClick={onMenuClick}
+        aria-label="Open menu"
       >
-        ☰
+        <Menu size={22} strokeWidth={2} />
       </button>
 
 
       {/* Logo */}
 
       <div className="navbar-logo">
-        <span className="logo-icon">▶</span>
+        <span className="logo-icon"><Play /></span>
 
         <span className="logo-text">
-          UTube
+          VidTube
         </span>
       </div>
 
@@ -54,7 +67,9 @@ function Navbar({ onMenuClick }) {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        <button type="submit">🔍</button>
+        <button type="submit" aria-label="Search">
+          <Search size={20} strokeWidth={2} />
+        </button>
       </form>
 
 
@@ -64,11 +79,11 @@ function Navbar({ onMenuClick }) {
 
         <div className="notification-wrapper">
           <button
-            type="button"
             className="icon-button notification-button"
             onClick={() => setNotificationsOpen((prev) => !prev)}
+            aria-label="Notifications"
           >
-            🔔
+            <Bell size={20} strokeWidth={2} />
             <span className="notification-badge">3</span>
           </button>
 
@@ -80,7 +95,7 @@ function Navbar({ onMenuClick }) {
               </div>
 
               <div className="notification-item">
-                <div className="notification-icon">🔥</div>
+                <div className="notification-icon"><Flame size={20} strokeWidth={3} /></div>
                 <div>
                   <strong>Trending now</strong>
                   <p>React tutorials are trending today.</p>
@@ -89,7 +104,7 @@ function Navbar({ onMenuClick }) {
               </div>
 
               <div className="notification-item">
-                <div className="notification-icon">🎵</div>
+                <div className="notification-icon"><Music size={20} strokeWidth={2} /></div>
                 <div>
                   <strong>New music</strong>
                   <p>Check out the latest music videos.</p>
@@ -98,7 +113,7 @@ function Navbar({ onMenuClick }) {
               </div>
 
               <div className="notification-item">
-                <div className="notification-icon">⭐</div>
+                <div className="notification-icon"><Star size={20} strokeWidth={2} /></div>
                 <div>
                   <strong>Recommended for you</strong>
                   <p>We found some videos you may like.</p>
@@ -119,7 +134,9 @@ function Navbar({ onMenuClick }) {
             className="profile-button"
             onClick={() => setProfileOpen((prev) => !prev)}
           >
-            <div className="profile-avatar">M</div>
+            <div className="profile-avatar">
+              <User size={18} strokeWidth={2} />
+            </div>
           </button>
 
           {profileOpen && (
@@ -138,15 +155,15 @@ function Navbar({ onMenuClick }) {
               <div className="profile-menu-divider"></div>
 
               <button className="profile-menu-item">
-                👤 My Profile
+                <User size={18} strokeWidth={2} /> My Profile
               </button>
 
               <button className="profile-menu-item">
-                ⚙️ Settings
+                <Settings size={17} /> Settings
               </button>
 
               <button className="profile-menu-item">
-                🚪 Sign Out
+                <LogOut size={17} /> Sign Out
               </button>
             </div>
           )}

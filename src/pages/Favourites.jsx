@@ -1,9 +1,8 @@
-import { Link } from "react-router-dom";
-
 import videos from "../data/videos";
 import VideoCard from "../components/VideoCard";
 import { useVideos } from "../context/VideoContext";
 import EmptyState from "../components/EmptyState";
+import { Heart } from 'lucide-react';
 
 function Favourites() {
   const { favourites } = useVideos();
@@ -48,7 +47,7 @@ function Favourites() {
       ) : (
 
         <EmptyState
-          icon="❤️"
+          icon= <Heart size={25} strokeWidth={2} />
           title="No favorites yet"
           message="Videos you favorite will appear here."
           buttonText="Explore Videos"

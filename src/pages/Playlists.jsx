@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useVideos } from "../context/VideoContext";
 import EmptyState from "../components/EmptyState";
+import { Folder, Play } from "lucide-react";
 
 function Playlists() {
     const {
@@ -85,7 +86,7 @@ function Playlists() {
                                 key={playlist.id}
                             >
                                 <div className="playlist-card-icon">
-                                    ▶
+                                    <Play size={20} strokeWidth={2}/>
                                 </div>
 
                                 <div className="playlist-card-content">
@@ -126,7 +127,7 @@ function Playlists() {
                     </div>
                 ) : (
                     <EmptyState
-                        icon="📁"
+                        icon=<Folder size={20} strokeWidth={2}/>
                         title="No playlists yet"
                         message="Create your first playlist to organize your videos."
                     />

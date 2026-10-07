@@ -1,5 +1,18 @@
 import { NavLink } from "react-router-dom";
 import { useVideos } from "../context/VideoContext";
+import {
+    Home,
+    Compass,
+    Flame,
+    Heart,
+    Clock,
+    ListVideo,
+    GraduationCap,
+    Music,
+    Laugh,
+    Trophy,
+    Plane,
+} from "lucide-react";
 
 function Sidebar({ isOpen, onClose }) {
     const {
@@ -27,7 +40,7 @@ function Sidebar({ isOpen, onClose }) {
                         className="sidebar-link"
                         onClick={onClose}
                     >
-                        <span>🏠</span>
+                        <span><Home size={19} strokeWidth={2} /></span>
                         <span>Home</span>
                     </NavLink>
 
@@ -36,7 +49,7 @@ function Sidebar({ isOpen, onClose }) {
                         className="sidebar-link"
                         onClick={onClose}
                     >
-                        <span>🔎</span>
+                        <span><Compass size={19} strokeWidth={2} /></span>
                         <span>Explore</span>
                     </NavLink>
 
@@ -45,7 +58,7 @@ function Sidebar({ isOpen, onClose }) {
                         className="sidebar-link"
                         onClick={onClose}
                     >
-                        <span>🔥</span>
+                        <span><Flame size={19} strokeWidth={2} /></span>
                         <span>Trending</span>
                     </NavLink>
 
@@ -63,7 +76,7 @@ function Sidebar({ isOpen, onClose }) {
                         className="sidebar-link"
                         onClick={onClose}
                     >
-                        <span>❤️</span>
+                        <span><Heart size={19} strokeWidth={2} /></span>
                         <span>Favourites</span>
 
                         {favourites.length > 0 && (
@@ -78,7 +91,7 @@ function Sidebar({ isOpen, onClose }) {
                         className="sidebar-link"
                         onClick={onClose}
                     >
-                        <span>🕒</span>
+                        <span><Clock size={19} strokeWidth={2} /></span>
                         <span>Watch Later</span>
 
                         {watchLater.length > 0 && (
@@ -93,7 +106,7 @@ function Sidebar({ isOpen, onClose }) {
                         className="sidebar-link"
                         onClick={onClose}
                     >
-                        <span>📁</span>
+                        <span><ListVideo size={19} strokeWidth={2} /></span>
                         <span>Playlists</span>
                     </NavLink>
 
@@ -113,7 +126,7 @@ function Sidebar({ isOpen, onClose }) {
                         }
                         onClick={onClose}
                     >
-                        <span className="sidebar-icon">🎓</span>
+                        <span className="sidebar-icon"><GraduationCap size={19} strokeWidth={2} /></span>
                         <span>Education</span>
                     </NavLink>
 
@@ -124,7 +137,7 @@ function Sidebar({ isOpen, onClose }) {
                         }
                         onClick={onClose}
                     >
-                        <span className="sidebar-icon">🎵</span>
+                        <span className="sidebar-icon"><Music size={19} strokeWidth={2} /></span>
                         <span>Music</span>
                     </NavLink>
 
@@ -135,7 +148,7 @@ function Sidebar({ isOpen, onClose }) {
                         }
                         onClick={onClose}
                     >
-                        <span className="sidebar-icon">😂</span>
+                        <span className="sidebar-icon"><Laugh size={19} strokeWidth={2} /></span>
                         <span>Comedy</span>
                     </NavLink>
 
@@ -146,7 +159,7 @@ function Sidebar({ isOpen, onClose }) {
                         }
                         onClick={onClose}
                     >
-                        <span className="sidebar-icon">⚽</span>
+                        <span className="sidebar-icon"><Trophy size={19} strokeWidth={2} /></span>
                         <span>Sports</span>
                     </NavLink>
 
@@ -157,7 +170,7 @@ function Sidebar({ isOpen, onClose }) {
                         }
                         onClick={onClose}
                     >
-                        <span className="sidebar-icon">✈️</span>
+                        <span className="sidebar-icon"><Plane size={19} strokeWidth={2} /></span>
                         <span>Travel</span>
                     </NavLink>
 

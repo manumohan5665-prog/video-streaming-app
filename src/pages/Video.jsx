@@ -8,6 +8,18 @@ import {
 import videos from "../data/videos";
 import VideoCard from "../components/VideoCard";
 import { useVideos } from "../context/VideoContext";
+import {
+    ThumbsUp,
+    Heart,
+    Bookmark,
+    ListPlus,
+    Share2,
+    Clapperboard,
+    ChevronLeft,
+    ChevronRight,
+    TriangleAlert,
+    Play,
+} from "lucide-react";
 
 function Video() {
     const { id } = useParams();
@@ -26,6 +38,10 @@ function Video() {
         if (video) {
             addToRecentlyWatched(video.id);
         }
+    }, [video]);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
     }, [video]);
 
     const {
@@ -102,7 +118,7 @@ function Video() {
                 <div className="empty-state">
 
                     <div className="empty-icon">
-                        🎬
+                        <Clapperboard size={18} strokeWidth={2} />
                     </div>
 
                     <h2>
@@ -159,7 +175,7 @@ function Video() {
                                 }
                             }}
                         >
-                            ← Previous
+                            <ChevronLeft size={18} strokeWidth={2} /> Previous
                         </button>
 
                         <span>
@@ -178,7 +194,7 @@ function Video() {
                                 }
                             }}
                         >
-                            Next →
+                            <ChevronRight size={18} strokeWidth={2} /> Next
                         </button>
                     </div>
                 </div>
@@ -195,7 +211,7 @@ function Video() {
 
                 {playerError ? (
                     <div className="player-error">
-                        <div className="player-error-icon">⚠️</div>
+                        <div className="player-error-icon"><TriangleAlert size={18} strokeWidth={2} /></div>
 
                         <h3>Unable to load video</h3>
 
@@ -266,7 +282,15 @@ function Video() {
                             }
                             onClick={() => toggleLike(video.id)}
                         >
-                            {isLiked(video.id) ? "❤️ Liked" : "♡ Like"}
+                            {isLiked(video.id) ? <ThumbsUp
+                                size={18}
+                                fill={isLiked(video.id) ? "currentColor" : "none"}
+                                strokeWidth={2}
+                            /> : <ThumbsUp
+                                size={18}
+                                fill={isLiked(video.id) ? "currentColor" : "none"}
+                                strokeWidth={2}
+                            />}
                         </button>
 
                         <button
@@ -277,7 +301,15 @@ function Video() {
                             }
                             onClick={() => toggleFavourite(video.id)}
                         >
-                            {isFavourite(video.id) ? "❤️ Favourited" : "♡ Favourite"}
+                            {isFavourite(video.id) ? <Heart
+                                size={18}
+                                fill={isFavourite(video.id) ? "currentColor" : "none"}
+                                strokeWidth={2}
+                            /> : <Heart
+                                size={18}
+                                fill={isFavourite(video.id) ? "currentColor" : "none"}
+                                strokeWidth={2}
+                            />}
                         </button>
 
                         <button
@@ -288,7 +320,11 @@ function Video() {
                             }
                             onClick={() => toggleWatchLater(video.id)}
                         >
-                            {isWatchLater(video.id) ? "✓ Saved" : "🕒 Watch Later"}
+                            {isWatchLater(video.id) ? <Bookmark size={18}
+                                fill={isWatchLater(video.id) ? "currentColor" : "none"}
+                                strokeWidth={2} /> : <Bookmark size={18}
+                                    fill={isWatchLater(video.id) ? "currentColor" : "none"}
+                                    strokeWidth={2} />}
                         </button>
 
                         {/* PLAYLIST */}
@@ -298,7 +334,7 @@ function Video() {
                                 className="video-action-button"
                                 onClick={() => setShowPlaylistMenu((prev) => !prev)}
                             >
-                                ＋ Add to Playlist
+                                <ListPlus size={18} strokeWidth={2} />
                             </button>
 
                             {showPlaylistMenu && (
@@ -344,7 +380,7 @@ function Video() {
                                                     }}
                                                 >
                                                     <span>
-                                                        {alreadyAdded ? "✓" : "▶"}
+                                                        {alreadyAdded ? "✓" : <Play size={18} strokeWidth={2} />}
                                                     </span>
 
                                                     <span>{playlist.name}</span>
@@ -365,7 +401,7 @@ function Video() {
                             className="video-action-button"
                             onClick={handleShare}
                         >
-                            ↗ Share
+                            <Share2 size={18} strokeWidth={2} />
                         </button>
 
                     </div>

@@ -1,9 +1,8 @@
-import { Link } from "react-router-dom";
-
 import videos from "../data/videos";
 import VideoCard from "../components/VideoCard";
 import { useVideos } from "../context/VideoContext";
 import EmptyState from "../components/EmptyState";
+import { Clock } from 'lucide-react';
 
 function WatchLater() {
     const { watchLater } = useVideos();
@@ -48,7 +47,7 @@ function WatchLater() {
             ) : (
 
                 <EmptyState
-                    icon="🕒"
+                    icon= <Clock size={25} strokeWidth={2} />
                     title="Nothing saved yet"
                     message="Videos you save for later will appear here."
                     buttonText="Find Videos"
